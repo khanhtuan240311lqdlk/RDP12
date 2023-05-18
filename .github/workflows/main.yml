@@ -1,4 +1,4 @@
-name: RDP.12.GG
+name: CI
 
 
 on: [push, workflow_dispatch]
@@ -14,11 +14,15 @@ jobs:
 
     steps:
 
-    - name: ngrok
+    - name: Download
 
       run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
 
+    - name: Extract
+
       run: Expand-Archive ngrok.zip
+
+    - name: Auth
 
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
 
